@@ -5,7 +5,7 @@ class Solution {
         
         while(left < right){
             if(numbers[left] + numbers[right] == target){
-                return new int[]{left+1, right+1};
+                break;
             }else if(numbers[left] + numbers[right] > target){
                 right--;
             }else{
@@ -13,6 +13,6 @@ class Solution {
             }
         }
         
-        return new int[]{0,0};
+        return new int[]{left+1,right+1};
     }
 }
