@@ -2,7 +2,7 @@ class Solution {
     public boolean isPalindrome(String s) {
         //1. 순회하면서
         int filled_index = 0;
-        char[] charArr = s.toCharArray();
+        char[] charArr = new char[s.length()];
         for(int i = 0; i < s.length(); i++){
             char c = s.charAt(i);
             //1.1 alphanumeric chracters인 경우(소문자/숫자)=> 그대로 대입 + filled_index++;
