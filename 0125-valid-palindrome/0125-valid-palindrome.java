@@ -1,26 +1,56 @@
 class Solution {
+    
+    public char left_char;
+    public char right_char;
+    
     public boolean isPalindrome(String s) {
-        //1. 순회하면서
-        ArrayList<Character> list = new ArrayList<>();
-        for(int i = 0; i < s.length(); i++){
-            char c = s.charAt(i);
-            //1.1 alphanumeric chracters인 경우(소문자/숫자)=> 그대로 대입 + filled_index++;
-            if(c >= 97 && c <= 122 || c >= 48 && c <= 57){
-                list.add(c);
-            }else if(c >= 65 && c <= 90){ //1.2 대문자인 경우 => c + 32 대입 + fille_index++;
-                list.add((char)(c + 32));
-            }
+        if(s.length() == 1){
+            return true;
         }
-        
         int left = 0;
-        int right = list.size()-1;
+        int right = s.length()-1;
+        
         while(left < right){
-            if(list.get(left) != list.get(right)){
-                return false;
+            left_char = s.charAt(left);
+            right_char = s.charAt(right);
+            //1. left가 alphanumeric이 아닌 경우
+            if(!check_alphanumeric(left_char)){
+                //1.1 left++; continue;
+                left++;
+                continue;
             }
-            left++;
-            right--;
+            
+            //2. right가 alphanumeric이 아닌 경우
+            if(!check_alphanumeric(right_char)){
+                //2.1 right--; continue;
+                right--;
+                continue;
+            }
+            
+            //3. left,right 모두 alphanumeric인 경우
+            //3.1 우선 left, right 모두 소문자로 변환
+            //3.2 회문인지 확인
+            //3.2.1 아니라면, return false;
+            //3.2.2 맞다면, left++; right--;
+            if(upper(left_char) != upper(right_char)){
+                return false;
+            }else{
+                left++;
+                right--;
+            }
         }
         return true;
+    }
+    
+    public boolean check_alphanumeric(char c){
+        if(c >= 97 && c <= 122 || c >= 48 && c <= 57 || c >= 65 && c <= 90){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public char upper(char c){
+        return c >= 65 && c <= 90 ? (char)(c+32) : c;
     }
 }
