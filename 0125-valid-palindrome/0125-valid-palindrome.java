@@ -1,8 +1,5 @@
 class Solution {
-    
-    public char left_char;
-    public char right_char;
-    
+
     public boolean isPalindrome(String s) {
         if(s.length() == 1){
             return true;
@@ -11,8 +8,8 @@ class Solution {
         int right = s.length()-1;
         
         while(left < right){
-            left_char = s.charAt(left);
-            right_char = s.charAt(right);
+            char left_char = s.charAt(left);
+            char right_char = s.charAt(right);
             //1. left가 alphanumeric이 아닌 경우
             if(!check_alphanumeric(left_char)){
                 //1.1 left++; continue;
