@@ -3,7 +3,9 @@ class Solution {
         int endIdx = 0;
         int minLength = Integer.MAX_VALUE;
         int sum = nums[0];
+        Loop1 :
         for(int startIdx = 0; startIdx < nums.length; startIdx++){
+            Loop2:
             while(true){
                 if(sum >= target){
                     int length = endIdx - startIdx + 1;
@@ -15,7 +17,7 @@ class Solution {
                         if(startIdx == 0){
                             return 0;
                         }
-                        break;
+                        break Loop1;
                     }else{
                         sum += nums[++endIdx];
                     }
