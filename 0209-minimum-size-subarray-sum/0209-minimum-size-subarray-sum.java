@@ -12,15 +12,16 @@ class Solution {
                     minLength = minLength > length ? length : minLength;
                     sum -= nums[startIdx];
                     break;
-                }else{ //sum < target
-                    if(endIdx >= nums.length-1){
-                        if(startIdx == 0){
-                            return 0;
-                        }
-                        break Loop1;
-                    }else{
-                        sum += nums[++endIdx];
+                }
+                
+                //sum < target
+                if(endIdx >= nums.length-1){
+                    if(startIdx == 0){
+                        return 0;
                     }
+                    break Loop1;
+                }else{
+                    sum += nums[++endIdx];
                 }
             }
         }
