@@ -1,5 +1,8 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
+        if(nums.length == 2){
+            return new int[]{0,1};
+        }
         //1.순환하면서 HashMap 생성 (key : 인덱스, value : nums[인덱스])
         HashMap<Integer, Integer> map = new HashMap<>();
         for(int i = 0; i < nums.length; i++){
