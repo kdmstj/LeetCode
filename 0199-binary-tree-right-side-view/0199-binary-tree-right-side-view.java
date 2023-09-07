@@ -25,7 +25,6 @@ class Solution {
         que.add(root);
         while(!que.isEmpty()){
             Queue<TreeNode> tmp_que = new LinkedList<>();
-            System.out.println(que.peek().val);
             while(que.size()>=1){
                 TreeNode node = que.poll();
                 
