@@ -39,9 +39,7 @@ class Solution {
                 
                 if(que.size() == 0){
                     answer.add(node.val);
-                    while(!tmp_que.isEmpty()){
-                        que.add(tmp_que.poll());
-                    }
+                    que = tmp_que;
                     break;
                 }  
             }
