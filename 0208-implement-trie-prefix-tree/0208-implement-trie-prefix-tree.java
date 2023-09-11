@@ -7,40 +7,63 @@ class Trie {
     }
     
     public void insert(String word) {
-        Node current = this.root;
-        for(char c : word.toCharArray()){
-            if (!current.children.containsKey(c)) {
-                    current.children.put(c, new Node());
-			}
-            current = current.children.get(c);
-        }
-        current.isEnd = true;
+        
+        insert(this.root, word);
+        
     }
     
     public boolean search(String word) {
-        Node current = this.root;
-        for(char c : word.toCharArray()){
-            if(!current.children.containsKey(c)){
-                return false;
-            }
-            current = current.children.get(c);
-        }
-        if(current.isEnd){
-            return true;
-        }
-        return false;
+        
+        return search(this.root, word);
+        
     }
     
     public boolean startsWith(String prefix) {
-        Node current = this.root;
-        for(char c : prefix.toCharArray()){
-            if(!current.children.containsKey(c)){
-                return false;
-            }
-            current = current.children.get(c);
-        }
-        return true;
         
+        return startsWith(this.root, prefix);
+        
+    }
+    
+    public void insert(Node current, String word){
+        if(word.length() == 0){
+            current.isEnd = true;
+            return;
+        }
+        
+        if(!current.children.containsKey(word.charAt(0))){
+            current.children.put(word.charAt(0), new Node());
+        }
+        
+        current = current.children.get(word.charAt(0));
+        insert(current, word.substring(1));
+    }
+    
+    public boolean search(Node current, String word){
+        if(word.length() == 0){
+            return current.isEnd ? true : false;
+        }
+        
+        if(!current.children.containsKey(word.charAt(0))){
+            return false;
+        }
+        
+        current = current.children.get(word.charAt(0));
+        
+        return search(current, word.substring(1));
+    }
+    
+    public boolean startsWith(Node current, String prefix){
+        if(prefix.length() == 0){
+            return true;
+        }
+        
+        if(!current.children.containsKey(prefix.charAt(0))){
+            return false;
+        }
+        
+        current = current.children.get(prefix.charAt(0));
+        
+        return startsWith(current, prefix.substring(1));
     }
 }
 
