@@ -24,9 +24,11 @@ class Solution {
             return null;
         }
         
+        //새로운 노드 추가
         Queue<Node[]> que = new LinkedList<>();
         Set<Integer> visited = new HashSet<>();
         ArrayList<Node> answer = new ArrayList<>();
+        
         Node newNode = new Node(node.val);
         answer.add(newNode);
         visited.add(newNode.val);
@@ -34,21 +36,24 @@ class Solution {
         
         while(!que.isEmpty()){
             Node[] nodeArr = que.poll();
-            List<Node> neighbors = nodeArr[0].neighbors;
+            List<Node> neighbors = nodeArr[0].neighbors; //기존에 neighbor
             for(Node neighbor: neighbors){
                 
-                if(!visited.contains(neighbor.val)){
-                    Node cloneNode = new Node(neighbor.val);
-                    que.add(new Node[]{neighbor, cloneNode});
-                    visited.add(cloneNode.val);
-                    nodeArr[1].neighbors.add(cloneNode);
-                    answer.add(cloneNode);
-                }else{
-                    for(int i = 0; i < answer.size(); i++){
-                        if(neighbor.val == answer.get(i).val){
-                            nodeArr[1].neighbors.add(answer.get(i));
-                        }
+                int idx = 0;
+                while(true){
+                    if(idx >= answer.size()){
+                        Node cloneNode = new Node(neighbor.val);
+                        que.add(new Node[]{neighbor, cloneNode});
+                        visited.add(cloneNode.val);
+                        nodeArr[1].neighbors.add(cloneNode);
+                        answer.add(cloneNode);
+                        break;
                     }
+                    if(neighbor.val == answer.get(idx).val){
+                        nodeArr[1].neighbors.add(answer.get(idx));
+                        break;
+                    }
+                    idx++;
                 }
             }
         }
