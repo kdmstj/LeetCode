@@ -26,12 +26,10 @@ class Solution {
         
         //새로운 노드 추가
         Queue<Node[]> que = new LinkedList<>();
-        Set<Integer> visited = new HashSet<>();
         ArrayList<Node> answer = new ArrayList<>();
         
         Node newNode = new Node(node.val);
         answer.add(newNode);
-        visited.add(newNode.val);
         que.add(new Node[]{node, newNode});
         
         while(!que.isEmpty()){
@@ -44,7 +42,6 @@ class Solution {
                     if(idx >= answer.size()){
                         Node cloneNode = new Node(neighbor.val);
                         que.add(new Node[]{neighbor, cloneNode});
-                        visited.add(cloneNode.val);
                         nodeArr[1].neighbors.add(cloneNode);
                         answer.add(cloneNode);
                         break;
